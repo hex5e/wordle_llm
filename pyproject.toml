@@ -1,0 +1,26 @@
+[project]
+name = "worldle-llm"
+version = "0.1.0"
+description = "A small model trained on a laptop to play Wordle"
+readme = "README.md"
+requires-python = ">=3.12,<3.15"
+dependencies = [
+    "torch>=2.11.0",
+    "triton-xpu>=3.7.0; sys_platform == 'win32' or sys_platform == 'linux'",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = [
+    { index = "pytorch-xpu", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]
+triton-xpu = [
+    { index = "pytorch-xpu", marker = "sys_platform == 'win32' or sys_platform == 'linux'" },
+]
+
+[[tool.uv.index]]
+name = "pytorch-xpu"
+url = "https://download.pytorch.org/whl/xpu"
+explicit = true
